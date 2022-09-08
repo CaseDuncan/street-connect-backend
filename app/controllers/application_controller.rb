@@ -43,7 +43,10 @@ class ApplicationController < Sinatra::Base
     user = User.create(
       username: params[:username],
       email: params[:email],
-      password_digest: params[:password_digest]
+      password: params[:password],
+      user_type: params[:user_type],
+      image_url: params[:image_url],
+      phone: params[:phone],
     )
     user.to_json
   end
@@ -55,11 +58,39 @@ class ApplicationController < Sinatra::Base
     users.to_json
   end
 
-  get "/users" do
+  #get single user
+
+  get "/users/:id" do
     user = User.find(params[:id])
     user.to_json
   end
+
+  #display service providers
+
+  get "/users/providers" do
+    users = User.find_by(params[:user_type]=="Service Provider")
+    users.to_json
+  end
    
+  
+  #update
+  patch "/users/:id" do
+    updated_user = User.find(params[:id])
+    updated_user.update(
+      username: params[:username],
+      email: params[:email],
+      password: params[:password],
+      user_type: params[:user_type],
+      image_url: params[:image_url],
+      phone: params[:phone],
+
+    )
+  end
+
+  get "/users/customers" do
+    users = User.find_by(params[:user_type]=="Customer")
+    users.to_json
+  end
 
 
   
