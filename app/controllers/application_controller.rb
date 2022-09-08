@@ -76,8 +76,6 @@ class ApplicationController < Sinatra::Base
       image_url: params[:image_url]
     )
     updated_user.to_json
-
-    )
   end
    
 
