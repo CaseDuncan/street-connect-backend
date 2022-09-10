@@ -42,10 +42,7 @@ class ApplicationController < Sinatra::Base
   post "/users" do 
     user = User.create(
       username: params[:username],
-      email: params[:email],
-      service: params[:service],
-      password: params[:password],
-      user_type: params[:user_type],
+      email: params[:email],    
       phone: params[:phone],
       image_url: params[:image_url]
     )
@@ -55,7 +52,7 @@ class ApplicationController < Sinatra::Base
   #get users
 
   get "/users" do
-    users = User.all.order(params{[:created_at]})
+    users = User.all
     users.to_json
   end
 
@@ -69,9 +66,6 @@ class ApplicationController < Sinatra::Base
     updated_user = User.update(
       username: params[:username],
       email: params[:email],
-      service: params[:service],
-      password: params[:password],
-      user_type: params[:user_type],
       phone: params[:phone],
       image_url: params[:image_url]
     )
