@@ -71,6 +71,12 @@ class ApplicationController < Sinatra::Base
     )
     updated_user.to_json
   end
+
+  delete "/users/:id" do
+    delete_user = User.find(params[:id])
+    delete_user.destroy
+    delete_user.to_json
+  end
    
 
 
